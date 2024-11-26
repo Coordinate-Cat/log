@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/common/Hero.astro";
+import BlogCard from "../../components/blog/BlogCard.astro";
+import { fetchCollection } from "../../utils/blog";
+
+const posts = await fetchCollection();
+posts.sort((a: any, b: any) => b.data.date - a.data.date);
+---
+
+<BaseLayout
+  pageTitle="Lorem Ipsum"
+  pageDescription="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, cupiditate. Sit consequuntur, quas voluptate quidem facere ipsum doloremque! Possimus deserunt eos voluptatibus molestias, minima id dolorum excepturi doloremque odit repudiandae?"
+>
+  <section class="has-text-centered mt-6">
+    <Hero
+      title="Blog"
+      titleSize="is-size-2"
+      titleSizeMobile="is-size-3"
+      subtitle="This is blog section where there's a list of posts."
+      subtitleSize="is-size-4"
+      subtitleSizeMobile="is-size-5"
+    />
+  </section>
+  <section class="has-text-centered container mx-auto mt-6 mb-6">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        {
+          posts.map((post) => (
+            <div class="mb-6 fade-in">
+              <BlogCard
+                title={post.data.title}
+                date={post.data.date}
+                description={post.data.description}
+                slug={"/blog/" + post.slug}
+                devLink={post.data.devLink}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
