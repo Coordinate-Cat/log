@@ -1,5 +1,4 @@
 ---
-import menuOptions from "../../data/menu-options.json";
 import SearchBox from "./SearchBox.jsx";
 
 import '../../global.css';
@@ -10,22 +9,7 @@ import '../../global.css';
     log
   </h1>
 
-  <div class="flex items-center">
-    <div class="flex">
-      {
-        menuOptions.map((option) => {
-          return (
-            <a href={option.url} class="font-semibold ml-1 text-gray-700 hover:text-black">
-            {option.label}
-          </a>
-        );
-      })
-    }
-    </div>
-    <div class="flex items-center ml-1">
-      <SearchBox client:visible />
-
-      {/* ダークモード切り替えアイコンを削除 */}
-    </div>
+  <div class="flex items-center ml-1">
+    <SearchBox client:visible />
   </div>
 </nav>
