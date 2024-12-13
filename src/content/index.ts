@@ -1,5 +1,5 @@
-import * as computedProps from "./post/computed-properties.md";
-import * as rendering from "./post/conditional-rendering-vif-vs-vfor.md";
-import * as dataBinding from "./post/data-binding-directives.md";
+const titles = [
+	"calling-native-commands-with-tauri"
+];
 
-export const posts = [computedProps, rendering, dataBinding];
+export const posts = await Promise.all(titles.map(title => import(`./post/${title}.md`)));
