@@ -1,5 +1,7 @@
-const titles = [
-	"calling-native-commands-with-tauri"
-];
+import blogTitles from "../data/blog-titles.json";
 
-export const posts = await Promise.all(titles.map(title => import(`./post/${title}.md`)));
+export const posts = await Promise.all(
+  blogTitles.map((title) => import(`./post/${title.url}`))
+);
+
+export { blogTitles };

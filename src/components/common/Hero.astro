@@ -1,38 +1,25 @@
 ---
-import { type Size, type TextSize } from "../../types/components";
-
-export interface Props {
+interface Props {
   title: string;
-  titleSize?: TextSize;
-  titleSizeMobile?: TextSize;
+  titleSize: string;
+  titleSizeMobile: string;
   subtitle: string;
-  subtitleSize?: TextSize;
-  subtitleSizeMobile?: TextSize;
-  size?: Size;
+  subtitleSize: string;
+  subtitleSizeMobile: string;
 }
 
-const {
-  title,
-  titleSize = "is-size-3",
-  titleSizeMobile = "is-size-4",
-  subtitle,
-  subtitleSize = "is-size-5",
-  subtitleSizeMobile = "is-size-6",
-  size = "is-small",
-} = Astro.props;
+const { title, titleSize, titleSizeMobile, subtitle, subtitleSize, subtitleSizeMobile } = Astro.props;
 ---
 
-<section class:list={["hero", size]}>
-  <div class="hero-body">
-    <h1
-      class:list={["title", titleSize, titleSizeMobile + "-mobile"]}
-      class="title"
-    >
-      {title}
-    </h1>
-    <p class:list={["subtitle", subtitleSize, subtitleSizeMobile + "-mobile"]}>
-      {subtitle}
-    </p>
-    <slot />
+<section class="bg-gray-100 py-12">
+  <div class="flex flex-col items-center">
+    <div class="container">
+      <h1 class={`title ${titleSize} ${titleSizeMobile}`}>
+        {title}
+      </h1>
+      <h2 class={`subtitle ${subtitleSize} ${subtitleSizeMobile}`}>
+        {subtitle}
+      </h2>
+    </div>
   </div>
 </section>

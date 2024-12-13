@@ -1,77 +1,31 @@
 ---
-import { Icon } from "astro-icon";
 import menuOptions from "../../data/menu-options.json";
-import SearchBoxOrama from "./SearchBoxOrama.vue";
+import SearchBox from "./SearchBox.jsx";
+
+import '../../global.css';
 ---
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand mt-4-desktop pt-4 mb-2 ml-2">
-    <a class="navbar-item" href="/">
-      <h1 class="is-size-3 is-size-5-mobile tertiary-color f-normal">
-        JOHN DOE
-      </h1>
-    </a>
-    <a
-      role="button"
-      class="navbar-burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="navbar-id"
-    >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
+<nav class="bg-white items-center justify-between flex w-full px-4 py-1" role="navigation" aria-label="main navigation">
+  <h1 class="font-bold text-red-500 text-lg">
+    log
+  </h1>
 
-  <div id="navbar-id" class="navbar-menu mt-4 mb-2">
-    <div class="navbar-end mr-4">
+  <div class="flex items-center">
+    <div class="flex">
       {
         menuOptions.map((option) => {
           return (
-            <a href={option.url} class="navbar-item f-600 tertiary-color ">
-              {option.label}
-            </a>
-          );
-        })
-      }
-      <div class="mt-4">
-        <SearchBoxOrama client:visible />
+            <a href={option.url} class="font-semibold ml-1 text-gray-700 hover:text-black">
+            {option.label}
+          </a>
+        );
+      })
+    }
+    </div>
+    <div class="flex items-center ml-1">
+      <SearchBox client:visible />
 
-        <Icon
-          class="ml-4 tertiary-color baseline-dark-mode pointer"
-          size={34}
-          name="mdi:theme-light-dark"
-        />
-      </div>
+      {/* ダークモード切り替えアイコンを削除 */}
     </div>
   </div>
 </nav>
-
-<script>
-  import { setTheme } from "../../utils/theme";
-
-  function openBurger() {
-    const $navbarBurgers = Array.prototype.slice.call(
-      document.querySelectorAll(".navbar-burger"),
-      0
-    );
-
-    $navbarBurgers.forEach((element) => {
-      element.addEventListener("click", () => {
-        const target = element.dataset.target;
-        const $target = document.getElementById(target) as HTMLElement;
-
-        element.classList.toggle("is-active");
-
-        $target!.classList.toggle("is-active");
-      });
-    });
-  }
-
-  document
-    .querySelector(".baseline-dark-mode")
-    ?.addEventListener("click", () => setTheme());
-
-  document.addEventListener("DOMContentLoaded", () => openBurger());
-</script>

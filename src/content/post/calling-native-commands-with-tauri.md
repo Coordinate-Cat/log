@@ -1,28 +1,32 @@
 ---
-title: "Tauriでネイティブコマンドを呼び出す"
-description: macOSのAppleScriptをRustから呼び出して情報を取得する
-date: 2024-11-27 
+title: "Calling Native Commands with Tauri"
+description: Calling macOS AppleScript from Rust to retrieve information
+date: 2024-11-27
+tags: ["Tauri", "Rust", "AppleScript"]
 ---
 
-この記事を簡潔化したもの
+Simplified version of this article
 
 - https://zenn.dev/ocat/articles/e7a22ac0f658f7
 
-## AppleScriptをRustから実行する
-RustコードからAppleScriptを実行して情報を取得する例
+## Executing AppleScript from Rust
+
+Example of executing AppleScript from Rust to retrieve information
+
 ```applescript
-tell application "Spotify" --Spotifyアプリケーションにコマンドを送信します。
-    if player state is playing then --Spotifyが再生中の場合
-        set trackName to name of current track --現在のトラックの名前を取得
-        set artistName to artist of current track --現在のトラックのアーティスト名を取得
-        return trackName & " by " & artistName --トラック名とアーティスト名を返す
+tell application "Spotify" -- Send command to Spotify application
+    if player state is playing then -- If Spotify is playing
+        set trackName to name of current track -- Get the name of the current track
+        set artistName to artist of current track -- Get the artist name of the current track
+        return trackName & " by " & artistName -- Return track name and artist name
     else
-        return "Spotify is not playing." --Spotifyが再生中でない場合
+        return "Spotify is not playing." -- If Spotify is not playing
     end if
 end tell
 ```
 
-### Rustでの実装
+### Implementation in Rust
+
 ```rust
 use std::process::Command;
 
@@ -40,14 +44,14 @@ pub fn get_spotify_track_info() -> Result<String, String> {
     end tell
     "#;
 
-    let output = Command::new("osascript") //osascriptコマンドを実行
+    let output = Command::new("osascript") // Execute osascript command
         .arg("-e")
         .arg(script)
         .output()
         .map_err(|e| e.to_string())?;
 
     if output.status.success() {
-        let result = String::from_utf8_lossy(&output.stdout).trim().to_string(); //UTF-8エンコードされた出力を文字列に変換
+        let result = String::from_utf8_lossy(&output.stdout).trim().to_string(); // Convert UTF-8 encoded output to string
         Ok(result)
     } else {
         Err(String::from_utf8_lossy(&output.stderr).trim().to_string())
@@ -55,24 +59,26 @@ pub fn get_spotify_track_info() -> Result<String, String> {
 }
 ```
 
-## Tauriのmain.rsにコマンドを登録
+## Registering the Command in Tauri's main.rs
+
 ```rust
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod spotify_info; // モジュールを追加
+mod spotify_info; // Add module
 
-use spotify_info::get_spotify_track_info; // コマンドをインポート
+use spotify_info::get_spotify_track_info; // Import command
 use tauri::Manager;
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![get_spotify_track_info]) // コマンドを登録
+        .invoke_handler(tauri::generate_handler![get_spotify_track_info]) // Register command
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
 ```
 
-## Reactでのフロントエンド実装
+## Frontend Implementation in React
+
 ```jsx
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api";
@@ -82,7 +88,7 @@ const App = () => {
 
   const fetchTrackInfo = async () => {
     try {
-      const result = await invoke("get_spotify_track_info"); // Rustのコマンドを呼び出す
+      const result = await invoke("get_spotify_track_info"); // Call Rust command
       setTrackInfo(result as string);
     } catch (error) {
       console.error("Error fetching track info:", error);
@@ -91,7 +97,7 @@ const App = () => {
 
   useEffect(() => {
     fetchTrackInfo();
-    const intervalId = setInterval(fetchTrackInfo, 5000); // 5秒ごとに更新
+    const intervalId = setInterval(fetchTrackInfo, 5000); // Update every 5 seconds
     return () => clearInterval(intervalId);
   }, []);
 

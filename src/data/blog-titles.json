@@ -1,0 +1,10 @@
+[
+  {
+    "title": "How to Implement Shortcut Keys to Open DevTools",
+    "url": "shortcut-keys-devtools"
+  },
+  {
+    "title": "Calling Native Commands with Tauri",
+    "url": "calling-native-commands-with-tauri"
+  }
+]

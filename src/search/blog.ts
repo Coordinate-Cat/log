@@ -7,6 +7,7 @@ export default async function fill() {
     schema: {
       title: "string",
       date: "string",
+      tags: "string[]",
       description: "string",
       url: "string",
     } as const,
@@ -16,12 +17,11 @@ export default async function fill() {
     await insert(blogDB, {
       title: post.frontmatter.title,
       date: post.frontmatter.date,
+      tags: post.frontmatter.tags,
       description: post.frontmatter.description,
-      url:
-        "/blog/" + post.file!.split("src/content/post/").pop()!.split(".md")[0],
+      url: "/blog/" + post.file!.split("blog/").pop()!.split(".md")[0],
     });
   }
-
   return {
     instance: blogDB,
     params: {
@@ -31,6 +31,7 @@ export default async function fill() {
         title: 5,
         content: 0.1,
       },
+      match: "partial", // 部分一致を有効にする
     },
   };
 }

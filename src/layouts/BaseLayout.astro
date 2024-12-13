@@ -32,11 +32,11 @@ const { pageTitle, pageDescription } = Astro.props;
       }}
     />
   </head>
-  <body>
+  <body class="bg-gray-100 text-gray-900">
     <DefaultLayout>
-      <section class="min-100-vh">
+      <main class="container mx-auto p-4">
         <slot />
-      </section>
+      </main>
     </DefaultLayout>
   </body>
 </html>

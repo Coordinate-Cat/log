@@ -1,7 +1,8 @@
 import { getCollection } from "astro:content";
 import type { Post } from "../types/types"; // Post型をインポート
 
-export const fetchCollection = async (): Promise<Post[]> => await getCollection("post");
+export const fetchCollection = async (): Promise<Post[]> =>
+  (await getCollection("post")) as unknown as Post[];
 
 async function getStaticPaths() {
   const posts: Post[] = await fetchCollection();

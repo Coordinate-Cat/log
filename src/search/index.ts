@@ -7,20 +7,25 @@ export default async function (term: string) {
   const result = [];
 
   for (let db of [blogDB]) {
+    const searchResults = await search(db.instance, {
+      term: term.toLowerCase(), // 検索クエリを小文字に変換
+      ...db.params,
+    });
+
+    // 部分一致を手動でフィルタリング
+    const filteredResults = searchResults.hits.filter((hit) =>
+      hit.document.title.toLowerCase().includes(term.toLowerCase())
+    );
+
     result.push({
       id: db.instance.id,
-      output: search(db.instance, {
-        term,
-        ...db.params,
-      }),
+      output: filteredResults,
     });
   }
 
-  // wait for all output and then get the output.hits
-  return (await Promise.all(result.map((r) => r.output)))
-    .map((r) => r.hits)
+  // 結果をソートして返す
+  return result
+    .map((r) => r.output)
     .flat()
-    .sort((a, b) => {
-      return b.score - a.score;
-    });
+    .sort((a, b) => b.score - a.score);
 }
