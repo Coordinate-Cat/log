@@ -337,7 +337,6 @@ pre {
   white-space: pre;
   overflow-x: auto;
   overflow-y: hidden;
-  user-select: all;
 }
 
 figure pre {
