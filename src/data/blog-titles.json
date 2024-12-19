@@ -6,5 +6,13 @@
   {
     "title": "Calling Native Commands with Tauri",
     "url": "calling-native-commands-with-tauri"
+  },
+  {
+    "title": "Setting Up Kali Linux on an M2 Mac",
+    "url": "kali-m2-mac"
+  },
+  {
+    "title": "From Linux Permissions Introduction to Privilege Escalation Attacks (Exploiting Bad Permissions)",
+    "url": "privilege-escalation"
   }
 ]

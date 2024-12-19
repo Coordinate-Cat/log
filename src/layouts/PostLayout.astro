@@ -6,9 +6,10 @@ interface Props {
   pageTitle: string;
   pageDescription: string;
   postTitle: string;
+  pageTags: string[];
 }
 
-const { pageTitle, pageDescription, postTitle } = Astro.props;
+const { pageTitle, pageDescription, postTitle, pageTags } = Astro.props;
 ---
 
 <!doctype html>
@@ -49,6 +50,16 @@ const { pageTitle, pageDescription, postTitle } = Astro.props;
           <h1 class="text-4xl font-bold no-underline bg-none">
             {postTitle}
           </h1>
+          <!-- tags -->
+          <div class="flex flex-wrap">
+            {
+              pageTags.map((tag: string) => (
+                <div class="text-white text-xs bg-black border-2 border-white font-bold mr-2 m-0 p-1">
+                  {tag}
+                </div>
+              ))
+            }
+          </div>
         </header>
         <section>
           <slot />
