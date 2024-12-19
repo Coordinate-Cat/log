@@ -407,7 +407,7 @@ A useful website for hash identification is:
 # References
 
 - [Udemy] Linux Privilege Escalation For The OSCP Training
-- [https://qiita.com/ATS534/items/1cd31518f20b0dc0f078](https://qiita.com/ATS534/items/1cd31518f20b0dc0f078)
+- [Linux permissions and octal, why do you say 775 or 600?](https://qiita.com/ATS534/items/1cd31518f20b0dc0f078)
 - [https://www.onlinehashcrack.com/hash-identification.php](https://www.onlinehashcrack.com/hash-identification.php)
 
 ---
