@@ -43,8 +43,9 @@ https://www.kali.org/get-kali/#kali-installer-images (ARM64 .iso file).
 ## Installing UTM
 
 You can also get it from the App Store, but it's free to use.  
-It can be installed from the GitHub link provided on this page:  
-https://docs.getutm.app/installation/macos/
+It can be installed from the GitHub link provided on this page:
+
+- [UTM Installation Guide for macOS](https://docs.getutm.app/installation/macos/)
 
 ## Installation Setup
 
