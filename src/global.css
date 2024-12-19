@@ -125,6 +125,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  color: black;
+  background: #00ff3c;
+}
+
 * + * {
   margin-top: 1.2rem;
 }
@@ -144,7 +149,7 @@ body {
   position: relative;
   width: 100%;
   margin: 0;
-  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  /* max-width: calc(min(80ch, round(down, 100%, 1ch))); */
   line-height: 1.2rem;
   overflow-x: hidden;
 }
@@ -153,11 +158,36 @@ body {
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-  font-weight: 500;
+h4 {
+  font-weight: 600;
   margin: calc(1.2rem * 2) 0 1.2rem;
+  line-height: 1.2rem;
+}
+
+h2,
+h3,
+h4 {
+  background: white;
+  color: black;
+}
+h2::before {
+  content: "##";
+  margin-right: 4px;
+  font-weight: 900;
+  line-height: 1.2rem;
+}
+
+h3::before {
+  content: "###";
+  margin-right: 4px;
+  font-weight: 900;
+  line-height: 1.2rem;
+}
+
+h4::before {
+  content: "####";
+  margin-right: 4px;
+  font-weight: 900;
   line-height: 1.2rem;
 }
 
@@ -187,11 +217,14 @@ a {
   text-decoration: underline;
 }
 
+a:hover {
+  color: #00ff3c;
+}
+
 blockquote {
   border-left: 2px solid #fff;
   font-style: italic;
   color: white;
-  background: black;
   margin-left: 0;
   padding: 0.5rem 1rem;
 }
@@ -208,15 +241,6 @@ blockquote > p::before {
 img {
   max-width: 100%;
   margin-bottom: 1rem;
-}
-
-pre {
-  background-color: black !important;
-  border: 2px solid white;
-  font-size: 14px;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  overflow-x: auto;
 }
 
 hr {
@@ -304,10 +328,16 @@ details :last-child {
 }
 
 pre {
+  background-color: black !important;
+  border: 2px solid white;
+  font-size: 14px;
+  padding: 1rem;
+  margin: 1.2rem 0;
+  margin-bottom: 1rem;
   white-space: pre;
   overflow-x: auto;
-  margin: 1.2rem 0;
   overflow-y: hidden;
+  user-select: all;
 }
 
 figure pre {
@@ -525,4 +555,16 @@ label input {
         1ch
       )
     );
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  background-image: linear-gradient(#1d1d1d 1px, transparent 1px),
+    linear-gradient(to right, #1d1d1d 1px, black 1px);
+  background-size: 10px 10px;
 }

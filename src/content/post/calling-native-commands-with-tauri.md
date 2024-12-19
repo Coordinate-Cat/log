@@ -1,8 +1,22 @@
 ---
-title: "Calling Native Commands with Tauri"
-description: Calling macOS AppleScript from Rust to retrieve information
+title: "Calling Native Commands with Tauri."
+description: Calling macOS AppleScript from Rust to retrieve information.
 date: 2024-11-27
 tags: ["Tauri", "Rust", "AppleScript"]
+---
+
+> Calling macOS AppleScript from Rust to retrieve information
+
+---
+
+## Table of Contents
+
+- [Requirements and Background](#requirements-and-background)
+- [Implementation Steps](#implementation-steps)
+  - [Executing AppleScript from Rust](#executing-applescript-from-rust)
+  - [Registering the Command in Tauri's main.rs](#registering-the-command-in-tauris-mainrs)
+  - [Frontend Implementation in React](#frontend-implementation-in-react)
+
 ---
 
 Simplified version of this article

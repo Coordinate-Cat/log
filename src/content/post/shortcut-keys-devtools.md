@@ -1,5 +1,5 @@
 ---
-title: "How to Implement Shortcut Keys to Open DevTools"
+title: "How to Implement Shortcut Keys to Open DevTools."
 description: This article explains how to use the `CmdOrCtrl+I` shortcut key to open DevTools in a Tauri application. It also covers implementation steps considering behavior in both debug and production environments.
 date: 2024-12-13
 tags: ["Tauri", "Rust", "DevTools"]

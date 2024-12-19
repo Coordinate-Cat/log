@@ -1,5 +1,5 @@
 ---
-import CombinedLayout from "./CombinedLayout.astro";
+import DefaultLayout from "./DefaultLayout.astro";
 import { SEO } from "astro-seo";
 
 interface Props {
@@ -33,21 +33,39 @@ const { pageTitle, pageDescription, postTitle } = Astro.props;
       }}
     />
   </head>
-  <body class="font-jetbrains text-white bg-black px-4 mb-20">
-    <CombinedLayout>
-      <section class="">
+  <body
+    class="background font-jetbrains text-white bg-black px-4 max-w-screen-md mx-auto"
+  >
+    <DefaultLayout>
+      <section class="pb-20">
+        <!-- 一番下に移動 -->
+        <div
+          class="hover:text-[#00ff3c] w-full text-right m-0 text-md font-bold underline text-white cursor-pointer"
+          onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })"
+        >
+          {"↓"} Go to bottom
+        </div>
         <header class="fade-in my-6">
-          <h1 class="text-4xl font-bold no-underline text-white">
+          <h1 class="text-4xl font-bold no-underline bg-none">
             {postTitle}
           </h1>
         </header>
         <section>
           <slot />
         </section>
-        <a class="hover:text-red-500 text-md font-bold text-white" href="/blog">
-          {"←"} Return to blog
-        </a>
+        <div class="flex justify-between">
+          <a class="hover:text-[#00ff3c] text-md font-bold text-white" href="/">
+            {"←"} Return to blog
+          </a>
+          <!-- 一番上に戻る -->
+          <div
+            class="hover:text-[#00ff3c] m-0 text-md font-bold underline text-white cursor-pointer"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          >
+            {"↑"} Back to top
+          </div>
+        </div>
       </section>
-    </CombinedLayout>
+    </DefaultLayout>
   </body>
 </html>

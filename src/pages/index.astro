@@ -1,5 +1,5 @@
 ---
-import CombinedLayout from "../layouts/CombinedLayout.astro";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
 import { BlogCard } from "../components/blog/BlogCard.tsx";
 import { fetchCollection } from "../utils/blog";
 import type { Post } from "../types/types";
@@ -14,17 +14,15 @@ posts.sort(
 );
 ---
 
-<CombinedLayout
+<DefaultLayout
   pageTitle="Lorem Ipsum"
   pageDescription="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, cupiditate. Sit consequuntur, quas voluptate quidem facere ipsum doloremque! Possimus deserunt eos voluptatibus molestias, minima id dolorum excepturi doloremque odit repudiandae?"
 >
-  <section class="font-jetbrains bg-black text-white">
+  <section class="font-jetbrains text-white">
     <div class="w-full">
       {
         posts.map((post: Post, index: number) => (
-          <div
-            class={`h-fit border-2 m-0 border-white p-4 flex${index !== posts.length - 1 ? " border-b-0" : ""}`}
-          >
+          <div class={`h-fit border-2 mt-2 m-0 border-white flex`}>
             <BlogCard
               title={post.data.title}
               date={new Date(post.data.date)}
@@ -37,4 +35,4 @@ posts.sort(
       }
     </div>
   </section>
-</CombinedLayout>
+</DefaultLayout>
