@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.1.1",
-    "@orama/orama": "^3.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "astro": "^5.0.9",
     "astro-icon": "^1.1.4",
