@@ -21,7 +21,7 @@ posts.sort(
   <section class="font-jetbrains text-white">
     <div class="w-full">
       {
-        posts.map((post: Post, index: number) => (
+        posts.map((post: Post) => (
           <div class={`h-fit border-2 mt-2 m-0 border-white flex`}>
             <BlogCard
               title={post.data.title}

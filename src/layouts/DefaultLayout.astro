@@ -1,7 +1,7 @@
 ---
 import { Navbar } from "../components/common/Navbar.tsx";
 import { SEO } from "astro-seo";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 export interface Props {
   pageTitle?: string;
@@ -34,7 +34,7 @@ const { pageTitle, pageDescription } = Astro.props;
         ],
       }}
     />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body
     class="background font-jetbrains px-4 bg-black text-white justify-center w-full max-w-screen-xl mx-auto"
