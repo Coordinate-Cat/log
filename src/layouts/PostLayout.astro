@@ -1,5 +1,5 @@
 ---
-import DefaultLayout from "./DefaultLayout.astro";
+import CombinedLayout from "./CombinedLayout.astro";
 import { SEO } from "astro-seo";
 
 interface Props {
@@ -33,10 +33,10 @@ const { pageTitle, pageDescription, postTitle } = Astro.props;
       }}
     />
   </head>
-  <body class="font-jetbrains text-white bg-black px-4">
-    <DefaultLayout>
+  <body class="font-jetbrains text-white bg-black px-4 mb-20">
+    <CombinedLayout>
       <section class="">
-        <header class="my-6 fade-in">
+        <header class="fade-in my-6">
           <h1 class="text-4xl font-bold no-underline text-white">
             {postTitle}
           </h1>
@@ -48,6 +48,6 @@ const { pageTitle, pageDescription, postTitle } = Astro.props;
           {"←"} Return to blog
         </a>
       </section>
-    </DefaultLayout>
+    </CombinedLayout>
   </body>
 </html>

@@ -1,11 +1,14 @@
 ---
-import DefaultLayout from "./DefaultLayout.astro";
+import { Navbar } from "../components/common/Navbar.tsx";
 import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
 
 export interface Props {
   pageTitle?: string;
   pageDescription?: string;
 }
+
+import "../global.css";
 
 const { pageTitle, pageDescription } = Astro.props;
 ---
@@ -15,7 +18,7 @@ const { pageTitle, pageDescription } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <SEO
-      title={pageTitle?.includes("404") ? pageTitle : `John Doe - ${pageTitle}`}
+      title={pageTitle?.includes("404") ? pageTitle : `log - ${pageTitle}`}
       description={pageDescription}
       extend={{
         link: [{ rel: "icon", href: "/favicon.ico" }],
@@ -31,12 +34,15 @@ const { pageTitle, pageDescription } = Astro.props;
         ],
       }}
     />
+    <ViewTransitions />
   </head>
-  <body class="font-jetbrains bg-black text-white px-4">
-    <DefaultLayout>
-      <main>
-        <slot />
-      </main>
-    </DefaultLayout>
+  <body
+    class="font-jetbrains px-4 bg-black text-white justify-center w-full"
+    transition:animate="slide"
+  >
+    <Navbar />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>

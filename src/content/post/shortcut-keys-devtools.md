@@ -11,17 +11,17 @@ tags: ["Tauri", "Rust", "DevTools"]
 
 ## Table of Contents
 
-- [1. Requirements and Background](#1-requirements-and-background)
-- [2. Implementation Steps](#2-implementation-steps)
+- [Requirements and Background](#requirements-and-background)
+- [Implementation Steps](#implementation-steps)
   - [Implementing the Shortcut Functionality](#implementing-the-shortcut-functionality)
   - [Opening DevTools in Debug Environment](#opening-devtools-in-debug-environment)
-- [3. Resolving Chunk Size Warnings](#3-resolving-chunk-size-warnings)
-- [4. Signing MacOS Applications](#4-signing-macos-applications)
-- [5. Final Confirmation](#5-final-confirmation)
+- [Resolving Chunk Size Warnings](#resolving-chunk-size-warnings)
+- [Signing MacOS Applications](#signing-macos-applications)
+- [Final Confirmation](#final-confirmation)
 
 ---
 
-## 1. Requirements and Background
+## Requirements and Background
 
 When developing a Tauri application, you may want to open DevTools using a shortcut key. Adding the functionality to open DevTools with `CmdOrCtrl+I` allows for efficient debugging.
 
@@ -29,7 +29,7 @@ However, it is recommended to disable DevTools in production environments. There
 
 ---
 
-## 2. Implementation Steps
+## Implementation Steps
 
 ### Implementing the Shortcut Functionality
 
@@ -89,7 +89,7 @@ With this setup, pressing `CmdOrCtrl+I` will open DevTools in the debug environm
 
 ---
 
-## 3. Resolving Chunk Size Warnings
+## Resolving Chunk Size Warnings
 
 You may encounter the following warning during the build process:
 
@@ -120,7 +120,7 @@ export default defineConfig({
 
 ---
 
-## 4. Signing MacOS Applications
+## Signing MacOS Applications
 
 You may see the following warning when building on MacOS:
 
@@ -146,7 +146,7 @@ Specify the name of your Apple developer certificate in `signing_identity`.
 
 ---
 
-## 5. Final Confirmation
+## Final Confirmation
 
 Follow these steps to build and verify the application:
 
