@@ -28,7 +28,7 @@ export const BlogCard: React.FC<Props> = ({
         <p className="bold m-0 w-fit text-nowrap border-r-2 border-white p-1 pr-2 italic">
           {getFormattedDate(date)}
         </p>
-        <div className="m-0 w-full bg-white"></div>
+        <div className="m-0 flex-1 bg-white"></div>
       </div>
       <div className="m-0 flex">
         <p className="mb-0 w-fit truncate border-t-2 border-white p-1">
