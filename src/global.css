@@ -2,30 +2,163 @@
 @tailwind components;
 @tailwind utilities;
 
-h1 {
-  font-size: 32px;
+/* フォント設定 */
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-Bold.ttf") format("truetype");
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
-h2 {
-  font-size: 24px;
-  margin-bottom: 1rem;
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
 }
 
-h3 {
-  font-size: 20px;
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
-h4 {
-  font-size: 16px;
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
 }
 
-h5 {
-  font-size: 14px;
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
 }
 
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("/fonts/JetBrainsMono-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+* + * {
+  margin-top: 1.2rem;
+}
+
+html {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+body {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  line-height: 1.2rem;
+  overflow-x: hidden;
+}
+
+/* ヘッディングとテキスト */
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-  font-size: 12px;
+  font-weight: 500;
+  margin: calc(1.2rem * 2) 0 1.2rem;
+  line-height: 1.2rem;
 }
 
 p {
@@ -50,21 +183,26 @@ ol {
 }
 
 a {
-  color: #0070f3;
-  text-decoration: none;
+  color: #fff;
+  text-decoration: underline;
 }
 
 blockquote {
-  border-left: 2px solid #eaeaea;
+  border-left: 2px solid #fff;
   font-style: italic;
-  color: #7c7c7c;
-  background: #f9f9f9;
+  color: white;
+  background: black;
   margin-left: 0;
   padding: 0.5rem 1rem;
+}
 
-  > p {
-    margin-bottom: 0;
-  }
+blockquote > p {
+  margin-bottom: 0;
+}
+
+blockquote > p::before {
+  content: ">";
+  margin-right: 0.5rem;
 }
 
 img {
@@ -73,8 +211,8 @@ img {
 }
 
 pre {
-  background-color: #f6f8fa;
-  border-radius: 5px;
+  background-color: black !important;
+  border: 2px solid white;
   font-size: 14px;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -82,5 +220,309 @@ pre {
 }
 
 hr {
+  border: solid 1px white;
   margin-bottom: 1rem;
+}
+
+/* 共通のベーススタイル */
+
+/* その他の補完 */
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+sub {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  vertical-align: sub;
+  line-height: 0;
+  width: calc(1ch / 0.75);
+  font-size: 0.75rem;
+}
+
+table {
+  position: relative;
+  top: calc(1.2rem / 2);
+  width: calc(round(down, 100%, 1ch));
+  border-collapse: collapse;
+  margin: 0 0 calc(1.2rem * 2);
+}
+
+th,
+td {
+  border: solid 2px white;
+  padding: calc((1.2rem / 2)) calc(1ch - 2px / 2) calc((1.2rem / 2) - (2px));
+  line-height: 1.2rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+table tbody tr:first-child > * {
+  padding-top: calc((1.2rem / 2) - 2px);
+}
+
+img,
+video {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+details {
+  border: solid 2px white;
+  padding: calc(1.2rem - 2px) 1ch;
+  margin-bottom: 1.2rem;
+}
+
+summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+details[open] summary {
+  margin-bottom: 1.2rem;
+}
+
+details ::marker {
+  display: inline-block;
+  content: "▶";
+  margin: 0;
+}
+
+details[open] ::marker {
+  content: "▼";
+}
+
+details :last-child {
+  margin-bottom: 0;
+}
+
+pre {
+  white-space: pre;
+  overflow-x: auto;
+  margin: 1.2rem 0;
+  overflow-y: hidden;
+}
+
+figure pre {
+  margin: 0;
+}
+
+pre,
+code {
+  font-family: "JetBrainsMono", monospace;
+}
+
+code {
+  font-weight: 600;
+}
+
+figure {
+  margin: calc(1.2rem * 2) 3ch;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+figcaption {
+  display: block;
+  font-style: italic;
+  margin-top: 1.2rem;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0 0 1.2rem;
+}
+
+ul {
+  list-style-type: square;
+  padding: 0 0 0 2ch;
+}
+
+ol {
+  list-style-type: none;
+  counter-reset: item;
+  padding: 0;
+}
+
+ol ul,
+ol ol,
+ul ol,
+ul ul {
+  padding: 0 0 0 3ch;
+  margin: 0;
+}
+
+ol li:before {
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+  font-weight: 600;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li::marker {
+  line-height: 0;
+}
+
+input,
+button,
+textarea {
+  border: solid 2px white;
+  padding: 0 1ch;
+  margin: 0;
+  font: inherit;
+  font-weight: inherit;
+  height: 1.2rem;
+  width: auto;
+  overflow: visible;
+  background: black;
+  color: white;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="checkbox"] {
+  display: inline-grid;
+  place-content: center;
+  vertical-align: top;
+  width: 2ch;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked:before {
+  content: "";
+  width: 1ch;
+  height: calc(1.2rem / 2);
+  background: var(--text-color);
+}
+
+button:focus,
+input:focus {
+  --border-thickness: 3px;
+  outline: none;
+}
+
+input {
+  width: calc(round(down, 100%, 1ch));
+}
+
+::placeholder {
+  color: var(--text-color-alt);
+  opacity: 1;
+}
+
+::-ms-input-placeholder {
+  color: var(--text-color-alt);
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+button {
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--background-color-alt);
+}
+
+button:active {
+  transform: translate(2px, 2px);
+}
+
+label {
+  display: block;
+  width: calc(round(down, 100%, 1ch));
+  height: auto;
+  line-height: 1.2rem;
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+}
+
+label input {
+  width: 100%;
+}
+
+.tree,
+.tree ul {
+  position: relative;
+  padding-left: 0;
+  list-style-type: none;
+  line-height: 1.2rem;
+}
+
+.tree ul {
+  margin: 0;
+}
+
+.tree ul li {
+  position: relative;
+  padding-left: 1.5ch;
+  margin-left: 1.5ch;
+  border-left: solid 2px white;
+}
+
+.tree ul li:before {
+  position: absolute;
+  display: block;
+  top: calc(1.2rem / 2);
+  left: 0;
+  content: "";
+  width: 1ch;
+  border-bottom: solid 2px white;
+}
+
+.tree ul li:last-child {
+  border-left: none;
+}
+
+.tree ul li:last-child:after {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  content: "";
+  height: calc(1.2rem / 2);
+  border-left: solid 2px white;
+}
+
+.grid {
+  --grid-cells: 0;
+  display: flex;
+  gap: 1ch;
+  width: calc(
+    round(down, 100%, (1ch * var(--grid-cells)) - (1ch * var(--grid-cells) - 1))
+  );
+  margin-bottom: 1.2rem;
+}
+
+.grid > *,
+.grid > input {
+  flex: 0 0
+    calc(
+      round(
+        down,
+        (100% - (1ch * (var(--grid-cells) - 1))) / var(--grid-cells),
+        1ch
+      )
+    );
 }

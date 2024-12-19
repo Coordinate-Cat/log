@@ -24,7 +24,5 @@
     "sass": "^1.80.2",
     "vue": "^3.5.12"
   },
-  "devDependencies": {
-    "tailwindcss": "^3.4.16"
-  }
+  "devDependencies": {}
 }

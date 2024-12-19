@@ -12,12 +12,12 @@ posts.sort((a: Post, b: Post) => new Date(b.data.date).getTime() - new Date(a.da
   pageTitle="Lorem Ipsum"
   pageDescription="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, cupiditate. Sit consequuntur, quas voluptate quidem facere ipsum doloremque! Possimus deserunt eos voluptatibus molestias, minima id dolorum excepturi doloremque odit repudiandae?"
 >
-  <section class="">
+  <section>
     <div class="w-full">
       {
         posts.map((post: Post) => (
           // 最後以外の記事には border-b-0 を追加
-          <div class={`h-fit text-black border-4 border-black p-4 flex` + (post === posts[posts.length - 1] ? "" : " border-b-0")}>
+          <div class={`h-fit border-2 border-white flex` + (post === posts[posts.length - 1] ? "" : " border-b-0")}>
             <BlogCard
               title={post.data.title}
               date={new Date(post.data.date)}

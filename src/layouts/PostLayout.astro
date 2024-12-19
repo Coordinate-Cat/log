@@ -33,21 +33,18 @@ const { pageTitle, pageDescription, postTitle } = Astro.props;
       }}
     />
   </head>
-  <body class="font-sans text-gray-800">
+  <body class="font-jetbrains text-white bg-black px-4">
     <DefaultLayout>
-      <section class="min-h-screen container mx-auto my-6">
-        <a class="text-black hover:text-red-500 text-md font-bold ml-4" href="/blog">
-          {"←"} Return to blog
-        </a>
-        <header class="text-center mx-4 my-6 fade-in">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black">
+      <section class="">
+        <header class="my-6 fade-in">
+          <h1 class="text-4xl font-bold no-underline text-white">
             {postTitle}
           </h1>
         </header>
-        <section class="post-content mx-4 md:mx-6 lg:mx-8 fade-in">
+        <section>
           <slot />
         </section>
-        <a class="text-black hover:text-red-500 text-md font-bold ml-4" href="/blog">
+        <a class="hover:text-red-500 text-md font-bold text-white" href="/blog">
           {"←"} Return to blog
         </a>
       </section>

@@ -1,5 +1,5 @@
 ---
-import Navbar from "../components/common/Navbar.astro";
+import Navbar from "../components/common/Navbar.tsx";
 import Footer from "../components/common/Footer.astro";
 ---
 
@@ -8,7 +8,7 @@ import Footer from "../components/common/Footer.astro";
   <head>
     <meta charset="UTF-8" />
   </head>
-  <body>
+  <body class="flex justify-center w-full">
     <Navbar />
     <slot />
     <Footer />
