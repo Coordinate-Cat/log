@@ -14,5 +14,9 @@
   {
     "title": "From Linux Permissions Introduction to Privilege Escalation Attacks (Exploiting Bad Permissions)",
     "url": "privilege-escalation"
+  },
+  {
+    "title": "Managing Window Size and Position in a Tauri Application"
+    "url": "managing_window_size_and_position_in_a_tauri_application"
   }
 ]
