@@ -13,9 +13,7 @@ Additionally, we use **eslint-plugin-import-access** to achieve **safe import ma
 
 This article completely explains **directory structure**, **rule list**, **code examples**, and **lazy/Suspense operations**.
 
----
-
-# 📂 Project Directory Structure
+# Project Directory Structure
 
 ## Overall Structure
 
@@ -50,14 +48,7 @@ src/
   └── utils/
 ```
 
-### Diagram
-
-> Directory structure image: [Colocation Structure Diagram](https://www.planttext.com/?text=example_colocation_structure)  
-(*A proper PlantUML or Mermaid.js diagram can be prepared later.)
-
----
-
-# 📚 Colocation Operation Rules
+# Colocation Operation Rules
 
 ## Basic Rules
 
@@ -84,9 +75,7 @@ src/
 - Centralize type definitions under `/types/`
 - Centralize pure functions and helper utilities under `/utils/`
 
----
-
-# 🚀 Re-export (Loophole) Implementation Example
+# Re-export (Loophole) Implementation Example
 
 ## parts-a-1.tsx
 ```tsx
@@ -111,9 +100,7 @@ export { PartsA2 } from "./parts-a-2/parts-a-2";
 export { PartsA3 } from "./parts-a-3/parts-a-3";
 ```
 
----
-
-# 💤 lazy (Suspense) Operation Rules
+# lazy (Suspense) Operation Rules
 
 ## Policy
 
@@ -146,9 +133,7 @@ export default function Page() {
 }
 ```
 
----
-
-# 🎯 Conclusion
+# Conclusion
 
 By introducing this colocation + import-access pattern:
 
@@ -158,5 +143,3 @@ By introducing this colocation + import-access pattern:
 - Supports future scaling and refactoring safely
 
 This structure is one of the most practical setups for the Next.js App Router era.
-
----
