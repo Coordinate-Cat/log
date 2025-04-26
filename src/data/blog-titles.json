@@ -16,7 +16,11 @@
     "url": "privilege-escalation"
   },
   {
-    "title": "Managing Window Size and Position in a Tauri Application"
+    "title": "Managing Window Size and Position in a Tauri Application",
     "url": "managing_window_size_and_position_in_a_tauri_application"
+  },
+  {
+    "title": "React Colocation Pattern Design and Operation Guide",
+    "url": "react-colocation-pattern"
   }
 ]
