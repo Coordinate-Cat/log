@@ -25,7 +25,7 @@ tags: ["Go", "Golang", "Backend"]
 
 | 章 | タイトル | 概要 |
 |---|---|---|
-| [第1章](/blog/01_go_coding_guidelines) | 現場のリアルな Golang コーディング規約と命名パターン | インデント・命名規則・ファイル構成など、Go 開発の基本ルールを具体例付きで解説 |
+| [第1章](/blog/01_go_coding_guidelines) | Golang コーディング規約と命名パターン | インデント・命名規則・ファイル構成など、Go 開発の基本ルールを具体例付きで解説 |
 | [第2章](/blog/02_openapi_and_oapi_codegen) | OpenAPI 設計ガイドと oapi-codegen 実装方法 | OpenAPI によるスキーマ設計からコード自動生成までのワークフローを網羅 |
 | [第3章](/blog/03_clean_architecture_development_guide) | クリーンアーキテクチャ × DDD による Go バックエンド開発手順書 | 4 層構造（Controller / UseCase / Domain / Infrastructure）での新規 API 開発フローを全 10 ステップで解説 |
 | [第4章](/blog/04_controller_testing_guide) | コントローラーテストの書き方 | Controller 層テストの構造・命名・実装パターンと共通ユーティリティの活用方法 |
