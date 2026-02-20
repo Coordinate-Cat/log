@@ -1,5 +1,13 @@
 [
   {
+    "title": "Go バックエンド開発 実践ガイド — はじめに",
+    "url": "00_introduction"
+  },
+  {
+    "title": "現場のリアルなGolangコーディング規約と命名パターン",
+    "url": "01_go_coding_guidelines"
+  },
+  {
     "title": "How to Implement Shortcut Keys to Open DevTools",
     "url": "shortcut-keys-devtools"
   },

@@ -8,10 +8,12 @@ import "../reset.css";
 import "../global.css";
 
 const posts: Post[] = await fetchCollection();
-posts.sort(
-  (a: Post, b: Post) =>
-    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+posts.sort((a: Post, b: Post) => {
+  const dateDiff =
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+  if (dateDiff !== 0) return dateDiff;
+  return b.slug.localeCompare(a.slug);
+});
 ---
 
 <DefaultLayout pageTitle="Top" pageDescription="log">
