@@ -1,5 +1,5 @@
 ---
-title: "第1章:現場のリアルなGolangコーディング規約と命名パターン"
+title: "第1章:Golangコーディング規約と命名パターン"
 description: Golangの基本ルール・命名規則・エラーハンドリング・並行処理など、現場で使われるコーディング規約を具体例とともに解説。
 date: 2026-02-20
 tags: ["Go", "Golang", "CodingGuidelines"]
