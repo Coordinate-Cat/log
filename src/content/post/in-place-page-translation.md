@@ -1,7 +1,9 @@
+---
 title: "自作ブラウザにリアルタイムページ翻訳を実装、最適化しアルゴリズムを理解する"
 description: "Electron で自作ブラウザにリアルタイムページ翻訳を実装した際のアルゴリズム的な工夫と最適化のポイントを解説。URL を変えずに DOM を直接書き換える方式で、CSP を回避しながら高速な翻訳を実現する方法を紹介する。"
 date: 2026-02-24
 tags: ["Electron", "JavaScript", "translation", "optimization", "CSP"]
+---
 
 ## もくじ
 
