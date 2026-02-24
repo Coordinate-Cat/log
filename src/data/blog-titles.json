@@ -1,5 +1,9 @@
 [
   {
+    "title": "自作ブラウザにリアルタイムページ翻訳を実装、最適化しアルゴリズムを理解する",
+    "url": "in-place-page-translation"
+  },
+  {
     "title": "Go バックエンド開発 実践ガイド — はじめに",
     "url": "00_introduction"
   },
