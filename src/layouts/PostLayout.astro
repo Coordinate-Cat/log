@@ -1,5 +1,6 @@
 ---
 import DefaultLayout from "./DefaultLayout.astro";
+import { ShareButton } from "../components/blog/ShareButton.tsx";
 
 interface Props {
   pageTitle: string;
@@ -47,12 +48,20 @@ const { pageTitle, pageDescription, postTitle, pageTags, ogImage, ogUrl } =
         <a class="hover:text-[#00ff3c] text-md font-bold text-white" href="/">
           {"←"} Return to blog
         </a>
-        <!-- 一番上に戻る -->
-        <div
-          class="hover:text-[#00ff3c] m-0 text-md font-bold underline text-white cursor-pointer"
-          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-        >
-          {"↑"} Back to top
+        <div class="flex gap-6 items-center">
+          <ShareButton
+            client:load
+            title={postTitle}
+            url={ogUrl ?? ""}
+            ogImage={ogImage ?? ""}
+          />
+          <!-- 一番上に戻る -->
+          <div
+            class="hover:text-[#00ff3c] m-0 text-md font-bold underline text-white cursor-pointer"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          >
+            {"↑"} Back to top
+          </div>
         </div>
       </div>
     </section>
