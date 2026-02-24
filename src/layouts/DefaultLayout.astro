@@ -6,11 +6,20 @@ import { ClientRouter } from "astro:transitions";
 export interface Props {
   pageTitle?: string;
   pageDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  ogType?: string;
 }
 
 import "../global.css";
 
-const { pageTitle, pageDescription } = Astro.props;
+const {
+  pageTitle,
+  pageDescription,
+  ogImage,
+  ogUrl,
+  ogType = "website",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -20,6 +29,27 @@ const { pageTitle, pageDescription } = Astro.props;
     <SEO
       title={pageTitle?.includes("404") ? pageTitle : `log - ${pageTitle}`}
       description={pageDescription}
+      openGraph={ogImage
+        ? {
+            basic: {
+              title: pageTitle ?? "log",
+              type: ogType,
+              image: ogImage,
+              url: ogUrl,
+            },
+            optional: {
+              description: pageDescription,
+            },
+          }
+        : undefined}
+      twitter={ogImage
+        ? {
+            card: "summary_large_image",
+            title: pageTitle ?? "log",
+            description: pageDescription,
+            image: ogImage,
+          }
+        : undefined}
       extend={{
         link: [{ rel: "icon", href: "/favicon.ico" }],
         meta: [

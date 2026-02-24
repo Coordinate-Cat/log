@@ -31,6 +31,8 @@ const { Content } = await post.render();
   pageTitle={post.data.title}
   postTitle={post.data.title}
   pageTags={post.data.tags}
+  ogImage={new URL(`/og/${post.slug}.png`, Astro.site).href}
+  ogUrl={new URL(`/blog/${post.slug}`, Astro.site).href}
 >
   <Content />
 </PostLayout>
