@@ -5,8 +5,6 @@ date: 2026-03-10
 tags: ["Go", "Golang", "Backend", "Gin", "JWT", "Authentication"]
 ---
 
-# Gin + JWT による認証設計と実装パターン
-
 ## はじめに
 
 JWTをlocalStorageに入れるとXSSで盗まれるので、HTTPOnly Cookieに入れる設計がスタンダードらしい(公式俺々要約)  

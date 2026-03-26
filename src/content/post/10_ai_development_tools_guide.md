@@ -5,8 +5,6 @@ date: 2026-03-13
 tags: ["Go", "Golang", "Backend", "AI", "GitHubCopilot", "DevelopmentTools"]
 ---
 
-# AI 開発支援ツール活用ガイド
-
 ## はじめに
 
 AIを使い倒す方法をまとめた。コードに組み込むFactory、Copilotのプロンプト術、エージェントにプロジェクトを記憶させるMemory Bank、3つのパートに分けて書いた。

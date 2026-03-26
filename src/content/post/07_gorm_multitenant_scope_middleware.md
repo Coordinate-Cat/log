@@ -5,8 +5,6 @@ date: 2026-03-10
 tags: ["Go", "Golang", "Backend", "GORM", "MultiTenant", "Middleware"]
 ---
 
-# GORM プラグインによるマルチテナント実装とリクエストミドルウェア
-
 ## はじめに
 
 マルチテナントのSELECT/INSERT/UPDATE/DELETEに毎回`shop_id`を手書きするのはミスのもと。GORMのスコープとして登録しておけば、`WithContext(ctx)`を呼ぶだけで自動でフィルタがかかる。

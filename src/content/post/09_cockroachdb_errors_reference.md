@@ -5,8 +5,6 @@ date: 2026-03-13
 tags: ["Go", "Golang", "Backend", "ErrorHandling", "CockroachDB"]
 ---
 
-# cockroachdb/errors 完全リファレンス
-
 ## はじめに
 
 標準の`errors`をそのまま使うとスタックトレースが取れない。`cockroachdb/errors`に差し替えるだけでどこでエラーが起きたか追跡できるようになる。Sentryとの連携も楽。

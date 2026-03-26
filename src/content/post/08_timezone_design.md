@@ -5,8 +5,6 @@ date: 2026-03-10
 tags: ["Go", "Golang", "Backend", "MySQL", "Timezone"]
 ---
 
-# Go × MySQL のタイムゾーン設計（JST / UTC）
-
 ## はじめに
 
 タイムゾーン周りはハマりやすい。DBはUTC、アプリはJSTで統一して、変換はドライバとプラグインに任せるのが楽。意識的にUTCに変換するコードを書かないのがポイント。

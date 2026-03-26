@@ -5,8 +5,6 @@ date: 2026-03-01
 tags: ["Go", "Golang", "Backend", "CleanArchitecture", "DDD", "GORM"]
 ---
 
-# クリーンアーキテクチャ × DDD による Go バックエンド開発手順書
-
 ## はじめに
 
 筆者はDDDちょっとわかる程度

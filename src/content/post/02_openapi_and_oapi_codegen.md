@@ -5,8 +5,6 @@ date: 2026-03-01
 tags: ["Go", "Golang", "Backend", "OpenAPI", "oapi-codegen", "API"]
 ---
 
-# OpenAPI設計ガイドと oapi-codegen 実装方法
-
 ## はじめに
 
 oapi-codegenは、YAMLでAPIの仕様書を書いたら、あとはGoのコードを自動生成してくれる仕組み。型定義とバリデーションが一発生成されるえらいやつ。 OpenAPIの設計ルールとoapi-codegenの拡張フィールドを理解していく
