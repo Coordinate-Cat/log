@@ -391,7 +391,7 @@ await fetch('/products', {
 
 ## 9. multipart/form-data の場合
 
-画像をフォームデータとして送信するエンドポイントでは、`TrimWhiteSpaceMiddleware` が文字列フィールドの前後の空白を自動除去する。
+画像のファイルデータは S3 に直送するけど、フォームに含まれるテキストフィールド（商品名とか説明文）の前後空白は自動で消してほしい。`TrimWhiteSpaceMiddleware` がそれを身代わりにやってくれる。
 
 ```go
 // ミドルウェアの登録
