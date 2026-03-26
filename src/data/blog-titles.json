@@ -16,6 +16,42 @@
     "url": "01_go_coding_guidelines"
   },
   {
+    "title": "OpenAPI設計ガイドと oapi-codegen 実装方法",
+    "url": "02_openapi_and_oapi_codegen"
+  },
+  {
+    "title": "クリーンアーキテクチャ × DDD による Go バックエンド開発手順書",
+    "url": "03_clean_architecture_development_guide"
+  },
+  {
+    "title": "ハンドラーテストの書き方",
+    "url": "04_handler_testing_guide"
+  },
+  {
+    "title": "Gin + JWT による認証設計と実装パターン",
+    "url": "05_jwt_authentication_design"
+  },
+  {
+    "title": "AWS S3 署名付き URL を使ったファイルアップロード設計",
+    "url": "06_s3_file_upload_design"
+  },
+  {
+    "title": "GORM プラグインによるマルチテナント実装とリクエストミドルウェア",
+    "url": "07_gorm_multitenant_scope_middleware"
+  },
+  {
+    "title": "Go × MySQL のタイムゾーン設計（JST / UTC）",
+    "url": "08_timezone_design"
+  },
+  {
+    "title": "cockroachdb/errors 完全リファレンス",
+    "url": "09_cockroachdb_errors_reference"
+  },
+  {
+    "title": "AI 開発支援ツール活用ガイド",
+    "url": "10_ai_development_tools_guide"
+  },
+  {
     "title": "How to Implement Shortcut Keys to Open DevTools",
     "url": "shortcut-keys-devtools"
   },
