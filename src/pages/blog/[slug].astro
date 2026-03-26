@@ -23,7 +23,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <PostLayout
@@ -33,6 +33,7 @@ const { Content } = await post.render();
   pageTags={post.data.tags}
   ogImage={new URL(`/og/${post.slug}.png`, Astro.site).href}
   ogUrl={new URL(`/blog/${post.slug}`, Astro.site).href}
+  headings={headings}
 >
   <Content />
 </PostLayout>

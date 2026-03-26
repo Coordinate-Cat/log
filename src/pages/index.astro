@@ -18,9 +18,9 @@ posts.sort((a: Post, b: Post) => {
 const postData = posts.map((post: Post) => ({
   title: post.data.title,
   date:
-    post.data.date instanceof Date
-      ? (post.data.date as unknown as Date).toISOString()
-      : String(post.data.date),
+    typeof post.data.date === "string"
+      ? new Date(post.data.date).toISOString()
+      : (post.data.date as unknown as Date).toISOString(),
   description: post.data.description,
   tags: post.data.tags ?? [],
   slug: post.slug,

@@ -1,6 +1,7 @@
 ---
 import DefaultLayout from "./DefaultLayout.astro";
 import { ShareButton } from "../components/blog/ShareButton.tsx";
+import type { MarkdownHeading } from "astro";
 
 interface Props {
   pageTitle: string;
@@ -9,10 +10,20 @@ interface Props {
   pageTags: string[];
   ogImage?: string;
   ogUrl?: string;
+  headings?: MarkdownHeading[];
 }
 
-const { pageTitle, pageDescription, postTitle, pageTags, ogImage, ogUrl } =
-  Astro.props;
+const {
+  pageTitle,
+  pageDescription,
+  postTitle,
+  pageTags,
+  ogImage,
+  ogUrl,
+  headings = [],
+} = Astro.props;
+
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 
 <DefaultLayout
@@ -23,47 +34,132 @@ const { pageTitle, pageDescription, postTitle, pageTags, ogImage, ogUrl } =
   ogType="article"
 >
   <div
-    class="background font-jetbrains text-white bg-black px-4 max-w-screen-md mx-auto"
+    class="bg-transparent font-jetbrains text-white bg-black px-4 xl:flex xl:justify-center xl:gap-8 xl:items-start"
   >
-    <section class="pb-20">
-      <header class="fade-in my-6">
-        <h1 class="text-4xl font-bold no-underline bg-none">
-          {postTitle}
-        </h1>
-        <!-- tags -->
-        <div class="flex flex-wrap">
-          {
-            pageTags.map((tag: string) => (
-              <div class="text-white text-xs mb-2 bg-black border-2 border-white font-bold mr-2 m-0 p-1">
-                {tag}
-              </div>
-            ))
-          }
-        </div>
-      </header>
-      <section>
-        <slot />
-      </section>
-      <div class="flex justify-between">
-        <a class="hover:text-[#00ff3c] text-md font-bold text-white" href="/">
-          {"←"} Return to blog
-        </a>
-        <div class="flex gap-6 items-center">
-          <ShareButton
-            client:load
-            title={postTitle}
-            url={ogUrl ?? ""}
-            ogImage={ogImage ?? ""}
-          />
-          <!-- 一番上に戻る -->
-          <div
-            class="hover:text-[#00ff3c] m-0 text-md font-bold underline text-white cursor-pointer"
-            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-          >
-            {"↑"} Back to top
+    <!-- Main content -->
+    <div class="max-w-screen-md mx-auto xl:mx-0 xl:w-[768px] xl:shrink-0">
+      <section class="pb-20">
+        <header class="fade-in my-6">
+          <h1 class="text-4xl font-bold no-underline bg-none">
+            {postTitle}
+          </h1>
+          <!-- tags -->
+          <div class="flex flex-wrap">
+            {
+              pageTags.map((tag: string) => (
+                <div class="text-white text-xs mb-2 bg-black border-2 border-white font-bold mr-2 m-0 p-1">
+                  {tag}
+                </div>
+              ))
+            }
+          </div>
+        </header>
+        <section id="post-content">
+          <slot />
+        </section>
+        <div class="flex justify-between">
+          <a class="hover:text-[#00ff3c] text-md font-bold text-white" href="/">
+            {"←"} Return to blog
+          </a>
+          <div class="flex gap-6 items-center">
+            <ShareButton
+              client:load
+              title={postTitle}
+              url={ogUrl ?? ""}
+              ogImage={ogImage ?? ""}
+            />
+            <!-- 一番上に戻る -->
+            <div
+              class="hover:text-[#00ff3c] m-0 text-md font-bold underline text-white cursor-pointer"
+              onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            >
+              {"↑"} Back to top
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
+    <!-- TOC Sidebar (xl+ only) -->
+    {
+      tocHeadings.length > 0 && (
+        <aside class="hidden xl:block w-52 shrink-0 sticky top-20 max-h-[calc(100dvh-6rem)] overflow-y-auto py-6">
+          <p class="text-xs font-bold text-white/50 mb-3">Contents</p>
+          <nav aria-label="Table of contents">
+            <ul class="space-y-1">
+              {tocHeadings.map((heading) => (
+                <li>
+                  <a
+                    href={`#${heading.slug}`}
+                    data-toc-link
+                    data-heading-id={heading.slug}
+                    class={`block text-xs leading-snug text-white/60 hover:text-white py-0.5${heading.depth === 3 ? " pl-3" : ""}`}
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )
+    }
   </div>
 </DefaultLayout>
+
+<script>
+  let cleanupFn: (() => void) | undefined;
+
+  function initTOC() {
+    if (cleanupFn) {
+      cleanupFn();
+      cleanupFn = undefined;
+    }
+
+    const postContent = document.getElementById("post-content");
+    if (!postContent) return;
+
+    const headingElements = Array.from(
+      postContent.querySelectorAll<HTMLElement>("h2[id], h3[id]")
+    );
+    const tocLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]")
+    );
+    if (tocLinks.length === 0 || headingElements.length === 0) return;
+
+    const headingMap = new Map<string, HTMLAnchorElement>();
+    tocLinks.forEach((link) => {
+      const id = link.getAttribute("data-heading-id");
+      if (id) headingMap.set(id, link);
+    });
+
+    function updateActive() {
+      let activeId = headingElements[0]?.id ?? "";
+      const scrollY = window.scrollY + 130;
+      for (const h of headingElements) {
+        if (h.offsetTop <= scrollY) {
+          activeId = h.id;
+        } else {
+          break;
+        }
+      }
+      tocLinks.forEach((l) => {
+        l.style.color = "";
+      });
+      const link = headingMap.get(activeId);
+      if (link) link.style.color = "#00ff3c";
+    }
+
+    window.addEventListener("scroll", updateActive, { passive: true });
+    updateActive();
+
+    cleanupFn = () => {
+      window.removeEventListener("scroll", updateActive);
+      tocLinks.forEach((l) => {
+        l.style.color = "";
+      });
+    };
+  }
+
+  document.addEventListener("astro:page-load", initTOC);
+</script>

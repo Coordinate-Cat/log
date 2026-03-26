@@ -13,7 +13,7 @@ export const BlogCard: React.FC<Props> = ({
   title,
   date,
   tags,
-  description,
+  // description,
   slug,
 }) => {
   return (
@@ -30,12 +30,12 @@ export const BlogCard: React.FC<Props> = ({
         </p>
         <div className="m-0 flex-1 bg-white"></div>
       </div>
-      <div className="m-0 flex">
+      {/* <div className="m-0 flex">
         <p className="mb-0 w-fit truncate border-t-2 border-white p-1">
           {description}
         </p>
         <div className="m-0 flex-1 bg-white"></div>
-      </div>
+      </div> */}
     </a>
   );
 };
