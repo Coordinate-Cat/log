@@ -32,6 +32,32 @@ async function loadFonts() {
   return { jetbrainsFont: jetbrainsFont!, notoFont: notoFont! };
 }
 
+/** Returns the visual (display) width of a string, counting CJK characters as 2. */
+function visualWidth(text: string): number {
+  let w = 0;
+  for (const ch of text) {
+    const cp = ch.codePointAt(0) ?? 0;
+    // CJK Unified Ideographs, Hiragana, Katakana, CJK Compatibility, etc.
+    const isCjk =
+      (cp >= 0x3000 && cp <= 0x9fff) ||
+      (cp >= 0xac00 && cp <= 0xd7af) ||
+      (cp >= 0xf900 && cp <= 0xfaff) ||
+      (cp >= 0xff00 && cp <= 0xffef);
+    w += isCjk ? 2 : 1;
+  }
+  return w;
+}
+
+/** Staged font-size table based on visual width. Keeps titles within 2-3 lines. */
+function titleFontSize(title: string): number {
+  const vw = visualWidth(title);
+  if (vw <= 20) return 64;
+  if (vw <= 30) return 56;
+  if (vw <= 42) return 46;
+  if (vw <= 58) return 38;
+  return 32;
+}
+
 export const GET: APIRoute = async ({ props }) => {
   const { title, tags } = props as { title: string; tags: string[] };
   const { jetbrainsFont, notoFont } = await loadFonts();
@@ -81,13 +107,14 @@ export const GET: APIRoute = async ({ props }) => {
                 type: "p",
                 props: {
                   style: {
-                    fontSize: title.length > 40 ? "44px" : "56px",
+                    fontSize: `${titleFontSize(title)}px`,
                     fontWeight: "bold",
                     color: "#ffffff",
                     lineHeight: "1.35",
                     margin: "0",
                     letterSpacing: "-0.01em",
                     maxWidth: "1000px",
+                    wordBreak: "break-all",
                   },
                   children: title,
                 },
