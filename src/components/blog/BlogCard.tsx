@@ -18,11 +18,11 @@ export const BlogCard: React.FC<Props> = ({
 }) => {
   return (
     <a href={slug} className="w-full text-white no-underline hover:text-white">
-      <div className="m-0 flex">
+      <div className="m-0 flex items-center">
         <div className="m-0 truncate bg-transparent p-1 leading-tight">
           {title}
         </div>
-        <div className="m-0 flex-1 bg-white"></div>
+        <div className="m-0 flex-1 self-stretch bg-white"></div>
         <p className="bold m-0 shrink-0 text-nowrap bg-transparent p-1 pl-2 italic">
           {getFormattedDate(date)}
         </p>
