@@ -1,6 +1,6 @@
 ---
 title: "ブラウザをソースからビルドして起動する"
-description: "FirefoxフォークのZen BrowserをmacOS (Sonoma) でソースビルドする手順と、ハマりポイントをまとめた。SDKバージョン問題やWASI SDK未インストール問題の回避策も解説する。"
+description: "FirefoxフォークのZen BrowserをmacOS (Sonoma) でソースビルドしようとした記録。SDKバージョン問題・WASI SDK問題の回避策と、最終的にmacOS 26 SDK (Xcode 17+) が必須だった件。"
 date: 2026-03-27
 tags: ["ZenBrowser", "Firefox", "macOS", "Build", "OSS"]
 ---
@@ -115,7 +115,7 @@ def mac_sdk_min_version():
     return "15.2"   # 元は "26.2"
 ```
 
-> **注意**:本来はXcodeを最新版（17+）に上げるのが正道。SDKバージョンの要件はmacOS 26の新APIに依存していなければ動作するが、保証はない。
+> 後述するが、この回避策ではビルドを完走できなかった。SDK バージョンチェックは「見た目の関門」に過ぎず、本当の問題は SDK 自体に存在しない API を使っていることだった。
 
 ### 問題2: WASI SDK未インストール
 
@@ -143,46 +143,76 @@ macOS SDKの自動ダウンロードがTaskClusterのエンドポイントで拒
 
 ---
 
-## ビルド
+## ビルド（61分後に失敗）
 
-2 つの回避策を適用した後:
+2 つの回避策を適用したのち:
 
 ```bash
 cd /path/to/zen-browser/desktop
 npm run build
 ```
 
-Surferが`engine/mozconfig`を生成し、`engine/mach build`を呼び出す。M1 Macで30〜90分程度かかる。
+Surfer が `engine/mozconfig` を生成し、`engine/mach build` を呼び出す。しばらく Rust と C++ のコンパイルが進み、順調に見えたが **61分後**にエラーで停止した。
+
+### 問題4: `sys/fileport.h` が存在しない
 
 ```
-Building for "macos"...
-W AI agent detected. Terminal output limited to warnings and errors.
-W Adding make options from .../engine/mozconfig
+fatal error: 'sys/fileport.h' file not found
+   10 | #include <sys/fileport.h>
+                 ^~~~~~~~~~~~~~~~
+1 error generated.
+make[4]: *** [Unified_cpp_ipc_chromium1.o] Error 1
 ```
 
-ビルド成果物は`engine/obj-aarch64-apple-darwin/`に生成される。
-
----
-
-## 起動
+`ipc/chromium/src/chrome/common/ipc_channel_mach.cc` が使っている `fileport_makeport` / `fileport_makefd` は macOS の IPC ポートをファイルディスクリプタと相互変換するプライベートな syscall で、その宣言が入った `<sys/fileport.h>` は **macOS SDK 15.2 には存在しない**。
 
 ```bash
-npm start
+# SDK 内を確認
+find /Applications/Xcode.app/.../MacOSX15.2.sdk/usr/include/sys/ -name "fileport.h"
+# → 何も見つからない
 ```
 
-`engine/mach run --noprofile`が呼ばれ、ブラウザが起動する。ビルド後の初回起動は数秒かかる場合がある。
+これが SDK バージョン要件 26.2 の**本当の理由**だった。チェックを書き換えただけでは意味がなく、macOS 26 SDK (= Xcode 17+) に同梱されている `sys/fileport.h` が実際に必要になる。
+
+### 結論: macOS 14 + Xcode 16 では完全ビルドできない
+
+| 問題 | 対処 | 結果 |
+|------|------|------|
+| SDK バージョンチェック (26.2 要求) | `toolchain.configure` を書き換え | ✅ 通過 |
+| WASI SDK 未インストール | `--without-wasm-sandboxed-libraries` を mozconfig に追加 | ✅ 通過 |
+| bootstrap 時の 403 | 無視 | ✅ 無害 |
+| `sys/fileport.h` が SDK に存在しない | **回避策なし** | ❌ ビルド失敗 |
+
+macOS 14 Sonoma (Xcode 16.x) で Zen Browser をソースビルドするのは現時点では難しい。**Xcode 17 以上（macOS 26 SDK 同梱）** へのアップデートが必要。
 
 ---
 
-## 変更を加える場合
+## 正しい環境でのビルドと起動
 
-- **Zen 固有の JS/CSS**: `src/zen/`配下を直接編集→`npm run build:ui`（C++を再コンパイルしないため高速）
-- **Firefox エンジン本体のコード**: `engine/`配下を編集→`npm run export <パス>`でパッチとして`src/`に書き出す
-- **設定（prefs）**: `prefs/`配下のYAMLを編集→`npm run ffprefs`で`.inc`/`.js`に変換される
+Xcode 17+ がインストールされた環境であれば、回避策なしで以下の手順が通るはず:
+
+```bash
+npm i
+npm run download  # Firefox 149.0 ソースを取得（〜6分）
+npm run import    # 186個のパッチを適用
+npm run bootstrap # ビルド環境構築
+npm run build     # フルビルド（30〜90分）
+npm start         # engine/mach run --noprofile
+```
+
+ビルド成果物は `engine/obj-aarch64-apple-darwin/` に生成される。
+起動コマンドは `engine/mach run --noprofile`。
+
+---
+
+## コードを変更する場合
+
+- **Zen 固有の JS/CSS**: `src/zen/` 配下を直接編集 → `npm run build:ui`（C++ 再コンパイル不要で高速）
+- **Firefox エンジン本体のコード**: `engine/` 配下を編集 → `npm run export <パス>` でパッチとして `src/` に書き出す
+- **設定（prefs）**: `prefs/` 配下の YAML を編集 → `npm run ffprefs` で `.inc`/`.js` に変換される
 
 ---
 
 ## まとめ
 
-ハマりやすいのはmacOS SDKバージョンとWASI SDKの2点で、いずれもビルドオプションの変更で回避できる。  
-頻繁に開発する場合はXcodeを最新版に更新してSDKを揃えておく方が長期的には楽。
+Firefox 149.0 ベースの Zen Browser は macOS 26 SDK (Xcode 17+) を本当に要求しており、SDK バージョンチェックを下げても `sys/fileport.h` という macOS 26 固有のヘッダが必要なため回避できない。macOS 14 Sonoma + Xcode 16 での開発は諦めて Xcode を上げるのが正解。
