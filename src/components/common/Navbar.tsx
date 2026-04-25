@@ -15,7 +15,7 @@ export const Navbar = () => {
       <a
         href={"https://github.com/Coordinate-Cat"}
         className="m-0 text-white no-underline"
-        target="blank"
+        target="_blank"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
