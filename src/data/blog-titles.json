@@ -74,5 +74,9 @@
   {
     "title": "React Colocation Pattern Design and Operation Guide",
     "url": "react-colocation-pattern"
+  },
+  {
+    "title": "planner / tdd-guide / security-reviewer を協調させる AI 開発フロー",
+    "url": "sequential-parallel-ai-agent-workflow"
   }
 ]
